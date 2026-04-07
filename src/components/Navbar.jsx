@@ -11,11 +11,14 @@ function NavBar ({ cartCount }){
                 className="logo"
                 />
                 <h1>FreshMart</h1>
-            </div>
-
-            <div className="cart-info">
-               🛒 {cartCount}
-            </div>
+            </div> 
+            <ul className="nav-menu">
+                    <li>🏠Home</li>
+                    <li>ℹ️About</li>
+                    <li>🆘Help</li>
+                    <li>🛒Cart ({cartCount})</li>
+                </ul>
+            
         </nav>
 
     );
