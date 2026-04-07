@@ -1,4 +1,4 @@
-import logo from "../assets/logo.jpeg";
+import logo from "../assets/logo.png";
 
 function NavBar ({ cartCount }){
     return(
