@@ -1,135 +1,53 @@
-import { useState } from "react";
+import React from "react";
 
-import Navbar from "./components/Navbar";
-import ProductList from "./components/ProductList";
-import Cart from "./components/Cart";
-
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
 
 import "./App.css";
 
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Cart from "./components/Cart";
+
 function App() {
 
-  const [cartItems, setCartItems] =
-    useState([]);
-  //const [showCart, setShowCart] = useState(false);
-
-  // Add to Cart
-  const addToCart = (product) => {
-
-    const itemExists =
-      cartItems.find(
-        (item) => item.id === product.id
-      );
-
-    if (itemExists) {
-
-      setCartItems(
-        cartItems.map((item) =>
-          item.id === product.id
-            ? {
-                ...item,
-                quantity:
-                  item.quantity + 1,
-              }
-            : item
-        )
-      );
-
-    } else {
-
-      setCartItems([
-        ...cartItems,
-        { ...product, quantity: 1 },
-      ]);
-
-    }
-  };
-
-  // Increase Quantity
-  const increaseQty = (id) => {
-
-    setCartItems(
-      cartItems.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              quantity:
-                item.quantity + 1,
-            }
-          : item
-      )
-    );
-
-  };
-
-  // Decrease Quantity
-  const decreaseQty = (id) => {
-
-    setCartItems(
-      cartItems
-        .map((item) =>
-          item.id === id
-            ? {
-                ...item,
-                quantity:
-                  item.quantity - 1,
-              }
-            : item
-        )
-        .filter(
-          (item) => item.quantity > 0
-        )
-    );
-
-  };
-
-  // Remove Item
-  const removeItem = (id) => {
-
-    setCartItems(
-      cartItems.filter(
-        (item) => item.id !== id
-      )
-    );
-
-  };
-
-  // Purchase
-  const purchaseItems = () => {
-
-    alert("Purchase Successful ✅");
-
-    setCartItems([]); // empty cart
-
-  };
-
   return (
-    <div>
 
-      <Navbar
-        cartCount={
-          cartItems.reduce(
-            (total, item) =>
-              total + item.quantity,
-            0
-          )
-        }
-      />
+    <BrowserRouter>
 
-      <ProductList
-        addToCart={addToCart}
-      />
+      <Navbar />
 
-      <Cart
-        cartItems={cartItems}
-        increaseQty={increaseQty}
-        decreaseQty={decreaseQty}
-        removeItems={removeItem}
-        purchaseItems={purchaseItems}
-      />
+      <Routes>
 
-    </div>
+        <Route
+          path="/"
+          element={<Home />}
+        />
+
+        <Route
+          path="/cart"
+          element={<Cart />}
+        />
+
+        <Route
+          path="/about"
+          element={<h2>About Page</h2>}
+        />
+
+        <Route
+          path="/help"
+          element={<h2>Help Page</h2>}
+        />
+
+      </Routes>
+
+    </BrowserRouter>
+
   );
+
 }
 
 export default App;

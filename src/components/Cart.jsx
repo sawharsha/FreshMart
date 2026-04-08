@@ -1,76 +1,122 @@
-function Cart({
-    cartItems,
-    increaseQty,
-    decreaseQty,
-    removeItems,
-    purchaseItems
-}){
+import React from "react";
 
-    const total = cartItems.reduce(
-        (sum,item)=> 
-            sum+ item.price* item.quantity,0
-    );
+import {
+  useSelector,
+  useDispatch
+} from "react-redux";
 
-    return(
-        <div className="cart">
-            <h2>🛒 Cart</h2>
+import {
 
-            {cartItems.length===0 ?(
-                <p>Cart is Empty</p>
-            ):(
-                <>
-                {cartItems.map((item) => (
-                    <div className="cart-item"
-                    key={item.id  }
-                    >
-                        <span>{item.name}</span>
+  increaseQty,
+  decreaseQty,
+  removeItems,
+  purchaseItems
 
-                        <span>Rs.{item.price}</span>
+} from "../Service/store";
 
-                        <div className="qty">
+function Cart() {
 
-                            <button 
-                            onClick={()=> {decreaseQty(item.id)}}
-                            >
-                                ➖
-                            </button>
+  const cartItems = useSelector(
+    (state) => state.cart
+  );
 
-                            <span>
-                                {item.quantity}
-                            </span>
+  const dispatch = useDispatch();
 
-                            <button onClick={()=>{increaseQty(item.id)}}>
-                                ➕
-                            </button>
+  const total = cartItems.reduce(
+    (sum, item) =>
+      sum + item.price * item.quantity,
+    0
+  );
 
-                        </div>
+  return (
 
-                        <button
-                        className="remove-btn"
-                        onClick={()=>{removeItems(item.id)}}
-                        >
-                            ❌
-                        </button>
+    <div className="cart">
 
+      <h2>🛒 Cart</h2>
 
-                    </div>
-                ))
-                }
+      {cartItems.length === 0 ? (
 
-                <h3>
-                    Total: {total}
-                </h3>
+        <p>Cart is Empty</p>
+
+      ) : (
+
+        <>
+
+          {cartItems.map((item) => (
+
+            <div
+              className="cart-item"
+              key={item.id}
+            >
+
+              <span>{item.name}</span>
+              
+
+              <span>₹ {item.price}</span>
+
+              <div className="qty">
 
                 <button
-                className="purchase-btn"
-                onClick={purchaseItems}
+                  onClick={() =>
+                    dispatch(
+                      decreaseQty(item.id)
+                    )
+                  }
                 >
-                    Purchase
+                  ➖
                 </button>
-                </>
-            )}
-        </div>
-    );
+
+                <span>
+                  {item.quantity}
+                </span>
+
+                <button
+                  onClick={() =>
+                    dispatch(
+                      increaseQty(item.id)
+                    )
+                  }
+                >
+                  ➕
+                </button>
+
+              </div>
+
+              <button
+                className="remove-btn"
+                onClick={() =>
+                  dispatch(
+                    removeItems(item.id)
+                  )
+                }
+              >
+                ❌
+              </button>
+
+            </div>
+
+          ))}
+
+          <h3>
+            Total: ₹ {total}
+          </h3>
+
+          <button
+            className="purchase-btn"
+            onClick={() =>
+              dispatch(purchaseItems())
+            }
+          >
+            Purchase
+          </button>
+
+        </>
+
+      )}
+
+    </div>
+
+  );
 
 }
 

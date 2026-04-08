@@ -1,25 +1,38 @@
-function ProductCard ({product , addToCart}) {
-    return(
-       <div className="product-card">
-        <img
-        className="product-card img"
+import React from "react";
+import { useDispatch } from "react-redux";
+
+import { addToCart }
+from "../Service/store";
+
+function ProductCard({ product }) {
+
+  const dispatch = useDispatch();
+
+  return (
+
+    <div className="product-card">
+
+      <img
+      className="product-card img"
         src={product.image}
         alt={product.name}
-        />
+      />
 
-        <h3>{product.name}</h3>
+      <h3>{product.name}</h3>
 
-        <p>RS.{product.price}</p>
+      <p>₹ {product.price}</p>
 
-        <button
-        onClick={()=> addToCart(product)} 
-        >
-            Add to cart
-        </button>
-       </div>
+      <button
+        onClick={() =>
+          dispatch(addToCart(product))
+        }
+      >
+        Add to Cart
+      </button>
 
+    </div>
 
-    );
+  );
 
 }
 

@@ -1,27 +1,65 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
 import logo from "../assets/logo.png";
 
-function NavBar ({ cartCount }){
-    return(
+import { useSelector }
+from "react-redux";
 
-        <nav className="navbar">
-            <div className="logo-container">
-                <img 
-                src={logo}
-                alt="FreshMart - logo"
-                className="logo"
-                />
-                <h1>FreshMart</h1>
-            </div> 
-            <ul className="nav-menu">
-                    <li>🏠Home</li>
-                    <li>ℹ️About</li>
-                    <li>🆘Help</li>
-                    <li>🛒Cart ({cartCount})</li>
-                </ul>
-            
-        </nav>
+function Navbar() {
 
-    );
+  const cartItems = useSelector(
+    (state) => state.cart
+  );
+
+  const totalItems = cartItems.reduce(
+    (sum, item) =>
+      sum + item.quantity,
+    0
+  );
+
+  return (
+
+    <div className="navbar">
+
+      <div className="logo-container">
+
+        <img
+          src={logo}
+          alt="logo"
+          className="logo"
+        />
+
+        <h2>FreshMart</h2>
+
+      </div>
+
+      <ul className="nav-menu">
+
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+
+        <li>
+          <Link to="/cart">
+            Cart ({totalItems})
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+
+        <li>
+          <Link to="/help">Help</Link>
+        </li>
+
+      </ul>
+
+    </div>
+
+  );
+
 }
 
-export default NavBar;
+export default Navbar;
