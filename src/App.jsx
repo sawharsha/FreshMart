@@ -11,6 +11,8 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Cart from "./components/Cart";
+import About from "./pages/About";
+import Help from "./pages/Help";
 
 function App() {
 
@@ -34,12 +36,12 @@ function App() {
 
         <Route
           path="/about"
-          element={<h2>About Page</h2>}
+          element={<About/>}
         />
 
         <Route
           path="/help"
-          element={<h2>Help Page</h2>}
+          element={<Help/>}
         />
 
       </Routes>
