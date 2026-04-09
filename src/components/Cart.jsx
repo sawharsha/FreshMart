@@ -30,13 +30,13 @@ function Cart() {
 
   return (
 
-    <div className="cart">
+    <div className="cart-container">
 
-      <h2>🛒 Cart</h2>
+      <h2 className="cart-tittle">🛒 Cart</h2>
 
       {cartItems.length === 0 ? (
 
-        <p>Cart is Empty</p>
+        <p className="cart-tittle">Cart is Empty</p>
 
       ) : (
 
@@ -49,10 +49,10 @@ function Cart() {
               key={item.id}
             >
 
-              <span>{item.name}</span>
+              <span className="item-name">{item.name}</span>
               
 
-              <span>₹ {item.price}</span>
+              <span className="item-price">₹ {item.price}</span>
 
               <div className="qty">
 
@@ -97,7 +97,7 @@ function Cart() {
 
           ))}
 
-          <h3>
+          <h3 className="total">
             Total: ₹ {total}
           </h3>
 
