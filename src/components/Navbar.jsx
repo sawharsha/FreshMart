@@ -1,10 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import logo from "../assets/logo.png";
 
-import { useSelector }
-from "react-redux";
+import { useSelector }from "react-redux";
 
 function Navbar() {
 
@@ -25,7 +23,7 @@ function Navbar() {
       <div className="logo-container">
 
         <img
-          src={logo}
+          src="\assets\logo.png"
           alt="logo"
           className="logo"
         />

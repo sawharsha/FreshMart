@@ -1,10 +1,6 @@
 import React from "react";
-
-import { useSelector }
-from "react-redux";
-
-import ProductCard
-from "./ProductCard";
+import { useSelector } from "react-redux";
+import ProductCard from "./ProductCard";
 
 function Home() {
 

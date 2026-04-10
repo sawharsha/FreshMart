@@ -141,6 +141,7 @@ const store = configureStore({
 
     products: productSlice.reducer,
     cart: cartSlice.reducer,
+    
 
   },
 
